@@ -1,0 +1,26 @@
+#ifndef EULER_SOLVER_H
+#define EULER_SOLVER_H
+
+#include <vector>
+#include <functional>
+
+class EulerSolver {
+public:
+    // Конструктор
+    EulerSolver(std::function<double(double, double)> ode, double step);
+
+    // Метод для решения ОДУ на интервале [x0, xend] с начальным условием y(x0) = y0
+    std::vector<std::pair<double, double>> solve(double x0, double y0, double xend);
+
+    // Установка нового шага
+    void setStep(double new_step);
+
+    // Получение текущего шага
+    double getStep() const;
+
+private:
+    std::function<double(double, double)> differential_equation; // Правая часть ОДУ dy/dx = f(x, y)
+    double step_size; // Шаг интегрирования
+};
+
+#endif // EULER_SOLVER_H
